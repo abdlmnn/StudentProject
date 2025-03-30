@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{%block content%}
+    <div class="student-container">
+        <div class="form-container">
+            <div class="overlap-form-text">
+                <h2>Create Student</h2>
+            </div>
+            <form action="{%url 'add_student'%}" method="post">
+                {% csrf_token %}
+                <label for="">First Name:</label>
+                <input type="text" name="fname" id="">
+                <label for="">Last Name:</label>
+                <input type="text" name="lname" id="">
+                <div class="date-gender-container">
+                    <div class="course-cont">
+                        <label for="">Course:</label>
+                        <select name="course_id" id="">
+                            {%for data in course_data%}
+                            <option value="{{data.id}}">{{data.course}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div class="date-cont">
+                        <label for="">Birth Day:</label>
+                        <input type="date" name="birth" id="">
+                    </div>
+                    <div class="gender-cont">
+                        <label for="">Gender:</label>
+                        <select name="gender" id="">
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                
+                
+                <label for="">Address:</label>
+                <textarea name="address" id="" rows="5" cols="50" style="resize: none"></textarea>
+
+                <label for="">Contact Number:</label>
+                <input type="tel" name="contact" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" id="">
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="list-container">
+            <div class="overlap-list-text">
+                <h2>List of Students</h2>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Course</th>
+                            <th>Birth Day</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>Contact Number</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {%for data in student_data%}
+                        <tr>
+                            <td>{{data.firstname}}</td>
+                            <td>{{data.lastname}}</td>
+                            <td>{{data.course_id}}</td>
+                            <td>{{data.birthday}}</td>
+                            <td>{{data.gender}}</td>
+                            <td>{{data.address}}</td>
+                            <td>{{data.contactnumber}}</td>
+                            <td>
+                                <a href="">Read</a> 
+                            </td>
+                        </tr>
+                        {%endfor%}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{%endblock content%}

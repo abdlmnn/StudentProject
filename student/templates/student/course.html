@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{%block content%}
+    <div class="student-container">
+        <div class="form-container">
+            <div class="overlap-form-text">
+                <h2>Create Course</h2>
+            </div>
+            <form action="" method="post">
+                {% comment %} <label for="">Course:</label>
+                    <select name="course" id="">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select> {% endcomment %}
+                <label for="">Course:</label>
+                <input type="text" name="course" id="">
+
+                <label for="">Description:</label>
+                <textarea name="description" id="" rows="5" cols="50" style="resize: none"></textarea>
+        
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="list-container">
+            <div class="overlap-list-text">
+                <h2>List of Courses</h2>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Description</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BSIT</td>
+                            <td>Banchelor of Science Information Technology</td>
+                            <td>
+                                <a href="">Read</a> |
+                                <a href="">Update</a> |
+                                <a href="">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BSIT</td>
+                            <td>Banchelor of Science Information Technology</td>
+                            <td>
+                                <a href="">Read</a> |
+                                <a href="">Update</a> |
+                                <a href="">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BSIT</td>
+                            <td>Banchelor of Science Information Technology</td>
+                            <td>
+                                <a href="">Read</a> |
+                                <a href="">Update</a> |
+                                <a href="">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BSIT</td>
+                            <td>Banchelor of Science Information Technology</td>
+                            <td>
+                                <a href="">Read</a> |
+                                <a href="">Update</a> |
+                                <a href="">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{%endblock content%}

@@ -6,12 +6,13 @@
             <div class="overlap-form-text">
                 <h2>Create Teacher</h2>
             </div>
-            <form action="" method="post">
+            <form action="{%url 'add_teacher'%}" method="post">
+                {% csrf_token %}
                 <label for="">First Name:</label>
-                <input type="text" name="fname" id="">
+                <input type="text" name="fname" >
 
                 <label for="">Last Name:</label>
-                <input type="text" name="lname" id="">
+                <input type="text" name="lname">
         
                 <button type="submit">Submit</button>
             </form>
@@ -31,24 +32,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {%for data in teacher_data%}
                         <tr>
-                            <td>Salih</td>
-                            <td>Abdulmanan</td>
+                            <td>{{data.firstname}}</td>
+                            <td>{{data.lastname}}</td>
                             <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
+                                <a href="{%url 'update_teacher' data.id%}">Update</a> |
+                                <a href="{%url 'delete_teacher' data.id%}">Delete</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Salih</td>
-                            <td>Abdulmanan</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
+                        {%endfor%}
                     </tbody>
                 </table>
             </div>

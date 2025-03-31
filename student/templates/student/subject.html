@@ -6,12 +6,9 @@
             <div class="overlap-form-text">
                 <h2>Create Subject</h2>
             </div>
-            <form action="" method="post">
-                {% comment %} <label for="">Course:</label>
-                    <select name="course" id="">
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                    </select> {% endcomment %}
+            <form action="{%url 'add_subject'%}" method="post">
+                {% csrf_token %}
+                
                 <label for="">Subject Name:</label>
                 <input type="text" name="name" id="">
 
@@ -40,56 +37,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {%for data in subject_data%}
                         <tr>
-                            <td>Networking 1</td>
-                            <td>Networking </td>
-                            <td>C0928</td>
+                            <td>{{data.name}}</td>
+                            <td style='text-align: left;'>{{data.description}}</td>
+                            <td>{{data.section}}</td>
                             <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
+                                <a href="{%url 'update_subject' data.id%}">Update</a> |
+                                <a href="{%url 'delete_subject' data.id%}">Delete</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Networking 1</td>
-                            <td>Networking </td>
-                            <td>C0928</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Networking 1</td>
-                            <td>Networking </td>
-                            <td>C0928</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Networking 1</td>
-                            <td>Networking </td>
-                            <td>C0928</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Networking 1</td>
-                            <td>Networking </td>
-                            <td>C0928</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
+                        {%endfor%}
                     </tbody>
                 </table>
             </div>

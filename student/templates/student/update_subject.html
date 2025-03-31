@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{%block content%}
+    <div class="student-container">
+        <div class="form-container">
+            <div class="overlap-form-text">
+                <h2>Update Subject</h2>
+            </div>
+            <form action="{%url 'update_subject' data.id%}" method="post">
+                {% csrf_token %}
+                
+                <label for="">Subject Name:</label>
+                <input type="text" name="name" value="{{data.name}}">
+
+                <label for="">Description:</label>
+                <textarea name="description" rows="5" cols="50" style="resize: none">{{data.description}}</textarea>
+
+                <label for="">Section:</label>
+                <input type="text" name="section" value="{{data.section}}">
+        
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="list-container">
+            <div class="overlap-list-text">
+                <h2>List of Subjects</h2>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject Name</th>
+                            <th>Description</th>
+                            <th>Section</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{data.name}}</td>
+                            <td style='text-align: left;'>{{data.description}}</td>
+                            <td>{{data.section}}</td>
+                            <td>
+                                <a href="{%url 'subject'%}">Cancel</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{%endblock content%}

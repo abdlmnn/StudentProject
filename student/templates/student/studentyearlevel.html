@@ -6,17 +6,20 @@
             <div class="overlap-form-text">
                 <h2>Create Student Year Level</h2>
             </div>
-            <form action="" method="post">
+            <form action="{%url 'add_studentyearlevel'%}" method="post">
+                {% csrf_token %}
                  <label for="">Student:</label>
-                    <select name="course" id="">
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
+                    <select name="student_id" id="">
+                        {%for student in student_data %}
+                        <option value="{{student.id}}">{{student.firstname}} {{student.lastname}} | {{student.course_id}}</option>
+                        {%endfor%}
                     </select> 
 
                     <label for="">Year Level:</label>
-                    <select name="course" id="">
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
+                    <select name="yearlevel_id" id="">
+                        {%for year in yearlevel_data %}
+                        <option value="{{year.id}}">{{year.yearlevel}}</option>
+                        {%endfor%}
                     </select> 
         
                 <button type="submit">Submit</button>
@@ -31,23 +34,22 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Subject Name</th>
-                            <th>Description</th>
-                            <th>Section</th>
+                            <th>Student</th>
+                            <th>Year Level</th>
                             <th>Operations</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {%for data in studentyearlevel_data%}
                         <tr>
-                            <td>Networking 1</td>
-                            <td>Networking </td>
-                            <td>C0928</td>
+                            <td>{{data.student_id}}</td>
+                            <td>{{data.yearlevel_id}}</td>
                             <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
+                                <a href="{%url 'update_studentyearlevel' data.id%}">Update</a> |
+                                <a href="{%url 'delete_studentyearlevel' data.id%}">Delete</a>
                             </td>
                         </tr>
+                        {%endfor%}
                     </tbody>
                 </table>
             </div>

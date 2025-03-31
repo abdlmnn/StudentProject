@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{%block content%}
+    <div class="student-container">
+        <div class="form-container">
+            <div class="overlap-form-text">
+                <h2>Update Student</h2>
+            </div>
+            <form action="{%url 'update_student' student.id%}" method="post">
+                {% csrf_token %}
+                <label for="">First Name:</label>
+                <input type="text" name="fname" value="{{student.firstname}}">
+                <label for="">Last Name:</label>
+                <input type="text" name="lname" value="{{student.lastname}}">
+                <div class="date-gender-container">
+                    <div class="course-cont">
+                        <label for="">Course:</label>
+                        <select name="course_id">
+                            {%for data in course%}
+                            <option value="{{data.id}}">{{data.course}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                    <div class="date-cont">
+                        <label for="">Birth Day:</label>
+                        <input type="date" name="birth" value="{{student.birthday|date:'Y-m-d'}}">
+                    </div>
+                    <div class="gender-cont">
+                        <label for="">Gender:</label>
+                        <select name="gender">
+                            {%if student.gender == 'Male' or student.gender == 'M'%}
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            {%else%}
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            {%endif%}
+                        </select>
+                    </div>
+                    
+                </div>
+                
+                
+                <label for="">Address:</label>
+                <textarea name="address" rows="5" cols="50" style="resize: none">{{student.address}}</textarea>
+
+                <label for="">Contact Number:</label>
+                <input type="tel" name="contact" pattern="[0-9]{4}[0-9]{3}[0-9]{4}" value="{{student.contactnumber}}">
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="list-container">
+            <div class="overlap-list-text">
+                <h2>List of Students</h2>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Course</th>
+                            <th>Birth Day</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>Contact Number</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{student.firstname}}</td>
+                            <td>{{student.lastname}}</td>
+                            <td>{{student.course_id}}</td>
+                            <td>{{student.birthday}}</td>
+                            <td>{{student.gender}}</td>
+                            <td>{{student.address}}</td>
+                            <td>{{student.contactnumber}}</td>
+                            <td>
+                                <a href="{%url 'student'%}">Cancel</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{%endblock content%}

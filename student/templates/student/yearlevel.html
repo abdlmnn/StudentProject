@@ -6,7 +6,8 @@
             <div class="overlap-form-text">
                 <h2>Create Year Level</h2>
             </div>
-            <form action="" method="post">
+            <form action="{%url 'add_yearlevel'%}" method="post">
+                {%csrf_token%}
                 <label for="">Year Level:</label>
                 <input type="text" name="yearlevel" id="">
         
@@ -27,22 +28,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {%for data in yearlevel_data%}
                         <tr>
-                            <td>1st Year</td>
+                            <td>{{data.yearlevel}}</td>
                             <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
+                                <a href="{%url 'update_yearlevel' data.id%}">Update</a> |
+                                <a href="{%url 'delete_yearlevel' data.id%}">Delete</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2nd Year</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
+                        {%endfor%}
                     </tbody>
                 </table>
             </div>

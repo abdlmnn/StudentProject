@@ -6,26 +6,31 @@
             <div class="overlap-form-text">
                 <h2>Create Schedule</h2>
             </div>
-            <form action="" method="post">
+            <form action="{%url 'add_schedule'%}" method="post">
+                {% csrf_token %}
                 <div class="date-gender-container">
                     <div class="date-cont">
                         <label for="">Time Start:</label>
-                        <input type="time" name="starttime" value="00:00" id="">
+                        <input type="time" name="timestart" value="00:00" id="">
                     </div>
                     <div class="gender-cont">
                         <label for="">Time End:</label>
-                        <input type="time" name="endtime" value="00:00" id="">
+                        <input type="time" name="timeend" value="00:00" id="">
                     </div>
                 </div>
                 <label for="">Days:</label>
-                <input type="text" name="days">
+                <input type="text" name="days" placeholder='Ex. MTh'>
                 <label for="">Subject:</label>
-                <select name="subject" id="">
-                    <option value="">IT-0920</option>
+                <select name="subject_id" id="">
+                    {%for subject in subject_data%}
+                    <option value="{{subject.id}}">{{subject.name}} | {{subject.section}}</option>
+                    {%endfor%}
                 </select>
                 <label for="">Teacher:</label>
-                <select name="teacher" id="">
-                    <option value="">232</option>
+                <select name="teacher_id" id="">
+                    {%for teacher in teacher_data%}
+                    <option value="{{teacher.id}}">{{teacher.firstname}} {{teacher.lastname}}</option>
+                    {%endfor%}
                 </select>
                 
                 <button type="submit">Submit</button>
@@ -49,19 +54,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {%for data in schedule_data%}
                         <tr>
-                            <td>9:00 AM</td>
-                            <td>12:00 PM</td>
-                            <td>MTh</td>
-                            <td>IT-012</td>
-                            <td>Salih Abdulmanan</td>
+                            <td>{{data.timestart}}</td>
+                            <td>{{data.timeend}}</td>
+                            <td>{{data.days}}</td>
+                            <td>{{data.subject_id}}</td>
+                            <td>{{data.teacher_id}}</td>
                             <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
+                                <a href="{%url 'update_schedule' data.id%}">Update</a> |
+                                <a href="{%url 'delete_schedule' data.id%}">Delete</a>
                             </td>
                         </tr>
-                        
+                        {%endfor%}
                     </tbody>
                 </table>
             </div>

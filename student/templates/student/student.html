@@ -28,8 +28,8 @@
                     <div class="gender-cont">
                         <label for="">Gender:</label>
                         <select name="gender" id="">
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                     
@@ -40,7 +40,7 @@
                 <textarea name="address" id="" rows="5" cols="50" style="resize: none"></textarea>
 
                 <label for="">Contact Number:</label>
-                <input type="tel" name="contact" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" id="">
+                <input type="tel" name="contact" pattern="[0-9]{4} [0-9]{3} [0-9]{4}" id="">
                 
                 <button type="submit">Submit</button>
             </form>
@@ -76,7 +76,8 @@
                             <td>{{data.address}}</td>
                             <td>{{data.contactnumber}}</td>
                             <td>
-                                <a href="">Read</a> 
+                                <a href="{%url 'read_student' data.id%}">Read</a> 
+                                {% comment %} <a href="{%url 'delete_student' data.id%}">delete</a>  {% endcomment %}
                             </td>
                         </tr>
                         {%endfor%}

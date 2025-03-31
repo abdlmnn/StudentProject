@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="profile-card">
+    <div class="profile-header">
+        <h2>{{ student_data.firstname }} {{ student_data.lastname }}</h2>
+        <div class="profile-badge">{{ student_data.course_id }}</div>
+    </div>
+    
+    <div class="profile-body">
+        <div class="profile-detail">
+            <span class="detail-label">Birthday:</span>
+            <span class="detail-value">{{ student_data.birthday|date:"F d, Y" }}</span>
+        </div>
+        
+        <div class="profile-detail">
+            <span class="detail-label">Gender:</span>
+            <span class="detail-value">{{ student_data.gender }}</span>
+        </div>
+        
+        <div class="profile-detail">
+            <span class="detail-label">Address:</span>
+            <span class="detail-value">{{ student_data.address }}</span>
+        </div>
+        
+        <div class="profile-detail">
+            <span class="detail-label">Contact:</span>
+            <span class="detail-value">{{ student_data.contactnumber }}</span>
+        </div>
+    </div>
+    
+    <div class="profile-footer">
+        <div class="profile-actions">
+            <a href="{%url 'update_student' student_data.id%}" class="btn btn-edit">
+                 Update
+            </a>
+            <a href="{%url 'delete_student' student_data.id%}" class="btn btn-delete">
+                 Delete
+            </a>
+            <a href="{%url 'student'%}" class="btn btn-delete">
+                 Cancel
+            </a>
+        </div>
+    </div>
+</div>
+{%endblock%}

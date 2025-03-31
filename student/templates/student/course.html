@@ -6,12 +6,8 @@
             <div class="overlap-form-text">
                 <h2>Create Course</h2>
             </div>
-            <form action="" method="post">
-                {% comment %} <label for="">Course:</label>
-                    <select name="course" id="">
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                    </select> {% endcomment %}
+            <form action="{%url 'add_course'%}" method="post">
+                {%csrf_token%}
                 <label for="">Course:</label>
                 <input type="text" name="course" id="">
 
@@ -36,42 +32,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {%for data in course_data%}
                         <tr>
-                            <td>BSIT</td>
-                            <td>Banchelor of Science Information Technology</td>
+                            <td style='text-align:left;'>{{data.course}}</td>
+                            <td style='text-align:left;'>{{data.description}}</td>
                             <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
+                                <a href="{%url 'update_course' data.id%}">Update</a> |
+                                <a href="{%url 'delete_course' data.id%}">Delete</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>BSIT</td>
-                            <td>Banchelor of Science Information Technology</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>BSIT</td>
-                            <td>Banchelor of Science Information Technology</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>BSIT</td>
-                            <td>Banchelor of Science Information Technology</td>
-                            <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
-                            </td>
-                        </tr>
+                        {%endfor%}
+                        
                     </tbody>
                 </table>
             </div>

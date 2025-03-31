@@ -6,7 +6,8 @@
             <div class="overlap-form-text">
                 <h2>Create Attendance</h2>
             </div>
-            <form action="" method="post">
+            <form action="{%url 'add_attendance'%}" method="post">
+                {% csrf_token %}
                 <label for="">Status:</label>
                 <select name="status" id="">
                     <option value="Present">Present</option>
@@ -14,12 +15,16 @@
                     <option value="Absent">Absent</option>
                 </select>
                 <label for="">Student:</label>
-                <select name="student" id="">
-                    <option value="">Mohammad Abdulmanan</option>
+                <select name="student_id" id="">
+                    {%for student in student_data%}
+                    <option value="{{student.id}}">{{student.firstname}} {{student.lastname}} | {{student.course_id}}</option>
+                    {%endfor%}
                 </select>
                 <label for="">Schedule:</label>
-                <select name="schedule" id="">
-                    <option value="">232</option>
+                <select name="schedule_id" id="">
+                    {%for schedule in schedule_data%}
+                    <option value="{{schedule.id}}">{{schedule.subject_id}} | {{schedule.timestart}} - {{schedule.timeend}} | {{schedule.days}}</option>
+                    {%endfor%}
                 </select>
                 <div class="date-gender-container">
                     <div class="date-cont">
@@ -53,18 +58,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {%for data in attendance_data%}
                         <tr>
-                            <td>Present</td>
-                            <td>Salih Abdulmanan</td>
-                            <td>IT-021</td>
-                            <td>7/10/2004</td>
-                            <td>12:00 PM</td>
+                            <td>{{data.status}}</td>
+                            <td>{{data.student_id}}</td>
+                            <td>{{data.schedule_id}}</td>
+                            <td>{{data.date}}</td>
+                            <td>{{data.time}}</td>
                             <td>
-                                <a href="">Read</a> |
-                                <a href="">Update</a> |
-                                <a href="">Delete</a>
+                                <a href="{%url 'update_attendance' data.id%}">Update</a> |
+                                <a href="{%url 'delete_attendance' data.id%}">Delete</a>
                             </td>
                         </tr>
+                        {%endfor%}
                         
                     </tbody>
                 </table>

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{%block content%}
+    <div class="student-container">
+        <div class="form-container">
+            <div class="overlap-form-text">
+                <h2>Update Attendance</h2>
+            </div>
+            <form action="{%url 'update_attendance' data.id%}" method="post">
+                {%csrf_token%}
+                <label for="">Status:</label>
+                <select name="status" id="">
+                    <option value="Present">Present</option>
+                    <option value="Late">Late</option>
+                    <option value="Absent">Absent</option>
+                </select>
+                <label for="">Student:</label>
+                <select name="student_id" id="">
+                    {%for student in student_data%}
+                    <option value="{{student.id}}">{{student.firstname}} {{student.lastname}} | {{student.course_id}}</option>
+                    {%endfor%}
+                </select>
+                <label for="">Schedule:</label>
+                <select name="schedule_id" id="">
+                    {%for schedule in schedule_data%}
+                    <option value="{{schedule.id}}">{{schedule.subject_id}} | {{schedule.timestart}} - {{schedule.timeend}} | {{schedule.days}}</option>
+                    {%endfor%}
+                </select>
+                <div class="date-gender-container">
+                    <div class="date-cont">
+                        <label for="">Date:</label>
+                        <input type="date" name="date" value="{{data.date|date:'Y-m-d'}}">
+                    </div>
+                    <div class="gender-cont">
+                        <label for="">Time:</label>
+                        <input type="time" name="time" value="{{data.time|date:'H:i'}}" value="">
+                    </div>
+                </div>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="list-container">
+            <div class="overlap-list-text">
+                <h2>List of Attendance</h2>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Student</th>
+                            <th>Schedule</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Operations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{data.status}}</td>
+                            <td>{{data.student_id}}</td>
+                            <td>{{data.schedule_id}}</td>
+                            <td>{{data.date}}</td>
+                            <td>{{data.time}}</td>
+                            <td>
+                                <a href="{%url 'attendance'%}">Cancel</a>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{%endblock content%}
